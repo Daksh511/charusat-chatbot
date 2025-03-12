@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARUSAT Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>CHARUSAT Chatbot</h1>
+    <input type="text" id="userQuery" placeholder="Ask me something about CHARUSAT...">
+    <button onclick="chat()">Ask</button>
+    <p id="chatResponse"></p>
+
+    <script>async function chat() {
+            let query = document.getElementById("userQuery").value;
+            let response = await fetch("https://charusat-chatbot-api-gcg9emg3emdkgbh3.southindia-01.azurewebsites.net/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query: query })
+            });
+
+            let result = await response.json();
+            document.getElementById("chatResponse").innerText = result.response;
+        }</script>
+</body>
+
+</html>
